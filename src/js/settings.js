@@ -45,7 +45,7 @@ export const select = {
     tables: '.floor-plan .table',
   },
   nav: {
-    links: '.main-nav a', 
+    links: '.main-nav a',
   },
   // CODE ADDED START
   cart: {
@@ -129,5 +129,5 @@ export const templates = {
   // CODE ADDED START
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   // CODE ADDED END
-  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML), 
+  bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
 };
