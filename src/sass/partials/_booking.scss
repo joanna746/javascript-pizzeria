@@ -156,7 +156,8 @@
       }
 
     }
-
+   
+     
     &.booked {
       cursor: not-allowed;
       color: lighten($color-dark, 40%);
@@ -170,10 +171,12 @@
         top: 0;
         background: $color-dark;
         opacity: 0.4;
+        
       }
 
     }
-  }
+  
+}
 
   [data-table="1"] {
     left: 40px;
@@ -199,6 +202,9 @@
   margin: ($base-size * 4) auto;
 }
 .selected {
-  color: lighten(rgb(13, 97, 2), 10%);
+  
+  background: green;
   border: 3px solid greenyellow;
-} 
+  
+
+}

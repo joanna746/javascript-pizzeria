@@ -9,10 +9,13 @@ import hourPicker from './HourPicker.js';
 class Booking {
   constructor(element) {
     const thisBooking = this;
+    thisBooking.selectedBoking = '';
 
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.initTable();
+    
   }
   getData(){
     const thisBooking = this;
@@ -136,6 +139,7 @@ class Booking {
 
     for(let table of thisBooking.dom.tables){
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+      
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
       }
@@ -161,8 +165,62 @@ class Booking {
     thisBooking.dom.hourPicker = document.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.datePicker = document.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
-
+    
+    
+    
   }
+  initTable (){
+    const thisBooking = this;
+
+    thisBooking.selectedBoking = [];
+
+    for(let table of thisBooking.dom.tables){
+      table.addEventListener('click', function(event){
+        event.preventDefault();
+        if(table.classList.contains(classNames.booking.tableBooked)){
+          return window.alert('stolik zajęty');
+        
+          
+        }
+        else {
+          const tableSelects = document.querySelectorAll('.object.table');
+          console.log(tableSelects);
+          for (let tableSelect of tableSelects){
+            tableSelect.classList.remove('selected');
+          }
+          table.classList.add(classNames.booking.tableSelected);
+          thisBooking.clickedElement = event.target;
+          console.log('thisBooking.clickedElement',thisBooking.clickedElement);
+          if(table.classList.contains(classNames.booking.tableSelected)) {
+            table.classList.add('selected');
+          }
+          
+         
+          
+        }
+          
+      
+          
+        thisBooking.tableNumber = thisBooking.clickedElement.getAttribute(settings.booking.tableIdAttribute);
+        //console.log('thisBooking.tableNumber', thisBooking.tableNumber);
+          
+        thisBooking.selectedBoking.push(thisBooking.tableNumber);
+        //console.log('thisBooking.selectedBooking', thisBooking.selectedBoking);
+          
+      });
+
+       
+        
+  
+
+    }
+    
+
+    
+  }
+
+      
+  
   initWidgets() {
     const thisBooking = this;
     thisBooking.peopleAmountWidget = new AmountWidget(thisBooking.dom.peopleAmount);
@@ -173,7 +231,14 @@ class Booking {
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDom();
     });
+    thisBooking.dom.wrapper.addEventListener('click',function(){
+      thisBooking.initTable();
+    });
+    
   }
+  
+
+  
 }
 
 
