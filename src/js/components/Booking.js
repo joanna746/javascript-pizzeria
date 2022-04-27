@@ -120,7 +120,6 @@ class Booking {
     
     }
   }
-  
   updateDom(){
     const thisBooking =this;
 
@@ -179,44 +178,19 @@ class Booking {
         event.preventDefault();
         if(table.classList.contains(classNames.booking.tableBooked)){
           return window.alert('stolik zajęty');
-        
-          
         }
         else {
-          const tableSelects = document.querySelectorAll('.object.table');
-          console.log(tableSelects);
-          for (let tableSelect of tableSelects){
-            tableSelect.classList.remove('selected');
-          }
-          table.classList.add(classNames.booking.tableSelected);
-          thisBooking.clickedElement = event.target;
-          console.log('thisBooking.clickedElement',thisBooking.clickedElement);
+            
           if(table.classList.contains(classNames.booking.tableSelected)) {
+            console.log('usun');
+            table.classList.remove('selected');
+          } else {
+            console.log('dodaj');
             table.classList.add('selected');
           }
-          
-         
-          
         }
-          
-      
-          
-        thisBooking.tableNumber = thisBooking.clickedElement.getAttribute(settings.booking.tableIdAttribute);
-        //console.log('thisBooking.tableNumber', thisBooking.tableNumber);
-          
-        thisBooking.selectedBoking.push(thisBooking.tableNumber);
-        //console.log('thisBooking.selectedBooking', thisBooking.selectedBoking);
-          
       });
-
-       
-        
-  
-
     }
-    
-
-    
   }
 
       
@@ -230,9 +204,6 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDom();
-    });
-    thisBooking.dom.wrapper.addEventListener('click',function(){
-      thisBooking.initTable();
     });
     
   }
