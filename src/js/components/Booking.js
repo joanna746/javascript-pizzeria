@@ -184,9 +184,30 @@ class Booking {
           if(table.classList.contains(classNames.booking.tableSelected)) {
             console.log('usun');
             table.classList.remove('selected');
+            
           } else {
             console.log('dodaj');
             table.classList.add('selected');
+            
+            
+            thisBooking.clickedElement = event.target;
+            thisBooking.tableNumber = thisBooking.clickedElement.getAttribute(settings.booking.tableIdAttribute);
+            console.log('thisBooking.tableNumber ', thisBooking.tableNumber);
+            const tableValue = thisBooking.tableNumber.replace('thisBooking.tableNumber', '');
+            console.log(tableValue);
+            
+      
+
+            if (thisBooking.tableNumber.includes(tableValue)){
+              thisBooking.selectedBoking.push(thisBooking.tableNumber);
+            }
+            console.log('thisBooking.selectedBooking ', thisBooking.selectedBoking);
+            
+
+            
+                 
+  
+            
           }
         }
       });
