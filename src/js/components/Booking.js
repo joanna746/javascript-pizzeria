@@ -169,6 +169,7 @@ class Booking {
     
   }
   initTable (){
+    
     const thisBooking = this;
 
     thisBooking.selectedBoking = [];
@@ -176,32 +177,38 @@ class Booking {
     for(let table of thisBooking.dom.tables){
       table.addEventListener('click', function(event){
         event.preventDefault();
-        if(table.classList.contains(classNames.booking.tableBooked)){
+        const clickedElement = event.target;
+        thisBooking.tableNumber = clickedElement.getAttribute(settings.booking.tableIdAttribute);
+        const tableValue = thisBooking.tableNumber.replace('thisBooking.tableNumber', '');
+        console.log(tableValue);
+        
+        if(clickedElement.classList.contains(classNames.booking.tableBooked)){
           return window.alert('stolik zajęty');
         }
         else {
-            
-          if(table.classList.contains(classNames.booking.tableSelected)) {
+          
+          if(clickedElement.classList.contains(classNames.booking.tableSelected)) {
             console.log('usun');
-            table.classList.remove('selected');
+            clickedElement.classList.remove('selected');
+            const tableElement = thisBooking.tableNumber;
+            console.log(tableElement);
             
-          } else {
+            const index = thisBooking.selectedBoking;
+            const tableIndex = index.indexOf(tableElement);
+            index.splice(tableIndex,1);
+            console.log(index);
+          
+          }else {
             console.log('dodaj');
-            table.classList.add('selected');
-            
-            
-            thisBooking.clickedElement = event.target;
-            thisBooking.tableNumber = thisBooking.clickedElement.getAttribute(settings.booking.tableIdAttribute);
-            console.log('thisBooking.tableNumber ', thisBooking.tableNumber);
-            const tableValue = thisBooking.tableNumber.replace('thisBooking.tableNumber', '');
-            console.log(tableValue);
-            
-      
-
+            clickedElement.classList.add('selected');
+           
             if (thisBooking.tableNumber.includes(tableValue)){
+              
               thisBooking.selectedBoking.push(thisBooking.tableNumber);
+              console.log('thisBooking.selectedBoking', thisBooking.selectedBoking);
             }
-            console.log('thisBooking.selectedBooking ', thisBooking.selectedBoking);
+    
+            
             
 
             
@@ -213,7 +220,18 @@ class Booking {
       });
     }
   }
+  removeTable(){
+    const thisBooking = this;
+    
 
+    for (let table of thisBooking.dom.tables) {
+      if (table.classList.contains(classNames.booking.tableSelected)) {
+        table.classList.remove(classNames.booking.tableSelected);
+        thisBooking.selectedBoking = null;
+      }
+    }
+
+  }
       
   
   initWidgets() {
