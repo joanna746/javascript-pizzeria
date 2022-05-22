@@ -15,6 +15,7 @@ class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.initTable();
+    thisBooking.initActions();
     
   }
   getData(){
@@ -164,8 +165,12 @@ class Booking {
     thisBooking.dom.hourPicker = document.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.datePicker = document.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
-    
-    
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.cart.phone);
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.cart.address);
+    thisBooking.dom.duration = document.querySelector(select.booking.hourInput);
+    thisBooking.dom.ppl = document.querySelector(select.booking.pplInput);
+    thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
+    thisBooking.dom.formSubmit = element.querySelector(select.booking.formSubmit);
     
   }
   initTable (){
@@ -207,32 +212,59 @@ class Booking {
               thisBooking.selectedBoking.push(thisBooking.tableNumber);
               console.log('thisBooking.selectedBoking', thisBooking.selectedBoking);
             }
-    
-            
-            
-
-            
-                 
-  
-            
+     
           }
         }
       });
     }
   }
-  removeTable(){
+  
+  sendBooking(){
     const thisBooking = this;
-    
+    const url = settings.db.url + '/' + settings.db.booking;
 
-    for (let table of thisBooking.dom.tables) {
-      if (table.classList.contains(classNames.booking.tableSelected)) {
-        table.classList.remove(classNames.booking.tableSelected);
-        thisBooking.selectedBoking = null;
+    const payload = {
+      
+      'date': thisBooking.datePicker.value,
+      'hour': thisBooking.hourPicker.value,
+      'table': thisBooking.selectedBoking,
+      'duration': thisBooking.hoursAmountWidget.value,
+      'ppl': thisBooking.peopleAmountWidget.value,
+      'starters': [],
+      'phone': thisBooking.dom.phone.value,
+      'address': thisBooking.dom.address.value,
+      
+    };
+    for(let starter of thisBooking.dom.starters){
+      if(starter.checked == true){
+        payload.starters.push(starter.value);
       }
     }
-
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+    
+    fetch(url, options)
+      .then(rawResponse => rawResponse.json())
+      .then(parsedResponse => {
+        thisBooking.makeBooked(parsedResponse.date, parsedResponse.hour, parsedResponse.duration, parsedResponse.table);
+        
+        console.log('parsedResponse', parsedResponse);
+      });
+    
+  } 
+  initActions(){
+    const thisBooking = this;
+    thisBooking.dom.formSubmit.addEventListener('click', function(event){
+      event.preventDefault();
+      thisBooking.sendBooking();
+      alert('Rezerwacja udana!'); 
+    });
   }
-      
   
   initWidgets() {
     const thisBooking = this;
