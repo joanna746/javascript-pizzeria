@@ -39,7 +39,7 @@ const app = {
       });
     }
     
-    const clickButtons = document.querySelectorAll('#page-image-order, #page-image-booking ');
+    const clickButtons = document.querySelectorAll('.image-button ');
     console.log(clickButtons);
     
     
@@ -47,11 +47,11 @@ const app = {
     for (let button of clickButtons) {
       
       button.addEventListener('click', function () {
-        //console.log('click click', button.id);
+        
         for (let page of thisApp.pages) {
-          //console.log(page);
+         
           if (page.classList.contains('active')) {
-            //console.log('includes active');
+            
             page.classList.remove('active');
           }
           if (page.id == button.id) {
