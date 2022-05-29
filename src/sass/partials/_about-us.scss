@@ -150,3 +150,69 @@
       background-image: url(../../../images/assets/pizza-9.jpg);
     }
   }
+  .containerMain {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  
+  #carousel {
+    position: relative;
+    margin-top: 3%;
+    max-height: 230px;
+  }
+  .container1{
+    display: flex;
+  }
+  .element{
+    max-width: 60%;
+    max-height: 189px;
+    h2{
+      @extend .h1;
+      margin-block: 5px;
+    }
+  }
+  .image{
+    img{
+      width: 275px;
+      height: 184px;
+      border-bottom-left-radius: 15px;
+      border-top-left-radius: 15px;
+    }
+  }
+  .description{
+    padding:0 15px;
+    border-style: solid;
+    max-height: 184px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    border-left: none;
+    border-width: 1.5px;
+    border-color: rgba(0, 0, 0, 0.253);
+    font-style: italic;
+    font-size: 15px;
+    font-weight: 600;
+  
+  }
+  .tns-nav{
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .tns-nav button{
+    width: 13px;
+    height: 15px;
+    border-radius: 50%;
+    margin-inline: 1px;
+    cursor: pointer;
+  }
+  .tns-nav button:hover{
+    background: rgba(0, 0, 0, 0.185);
+  }
+  .tns-nav .tns-nav-active{
+    background-color: rgba(0, 0, 0, 0.233);
+  }
+  .tns-item{
+    margin: 0;
+    padding: 0;
+  }
+  

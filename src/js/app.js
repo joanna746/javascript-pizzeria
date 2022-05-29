@@ -155,5 +155,13 @@ const app = {
 };
 
 app.init();
+var slider = tns({
+  container: '.my-slider',
+  items: 1,
+  controls: false,
+  navPosition: 'bottom',
+  autoplay: true,
+  autoplayButtonOutput: false,
+});
 
 
