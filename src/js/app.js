@@ -33,11 +33,37 @@ const app = {
         const id = clickedElement.getAttribute('href').replace('#', '');
         /*run thisApp.activatePage with that id */
         thisApp.activatePage(id);
+
         /*change URL hash */
         window.location.hash = '#/' + id;
-
       });
     }
+    
+    const clickButtons = document.querySelectorAll('#page-image-order, #page-image-booking ');
+    console.log(clickButtons);
+    
+    
+
+    for (let button of clickButtons) {
+      
+      button.addEventListener('click', function () {
+        //console.log('click click', button.id);
+        for (let page of thisApp.pages) {
+          //console.log(page);
+          if (page.classList.contains('active')) {
+            //console.log('includes active');
+            page.classList.remove('active');
+          }
+          if (page.id == button.id) {
+            //console.log('it has the same id');
+            page.classList.add('active');
+            thisApp.activatePage(page.id);
+          }
+        }
+      });
+    }
+
+     
 
 
 
@@ -56,6 +82,7 @@ const app = {
         classNames.nav.active,
         link.getAttribute('href') == '#' + pageId
       );
+
     }
 
   },
