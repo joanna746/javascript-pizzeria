@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import { settings, select, classNames } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
@@ -38,20 +40,20 @@ const app = {
         window.location.hash = '#/' + id;
       });
     }
-    
+
     const clickButtons = document.querySelectorAll('.image-button ');
     console.log(clickButtons);
-    
-    
+
+
 
     for (let button of clickButtons) {
-      
+
       button.addEventListener('click', function () {
-        
+
         for (let page of thisApp.pages) {
-         
+
           if (page.classList.contains('active')) {
-            
+
             page.classList.remove('active');
           }
           if (page.id == button.id) {
@@ -63,7 +65,7 @@ const app = {
       });
     }
 
-     
+
 
 
 
@@ -155,7 +157,9 @@ const app = {
 };
 
 app.init();
-var slider = tns({
+
+
+let slider = tns({
   container: '.my-slider',
   items: 1,
   controls: false,
@@ -163,5 +167,9 @@ var slider = tns({
   autoplay: true,
   autoplayButtonOutput: false,
 });
+
+
+
+
 
 

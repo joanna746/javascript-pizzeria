@@ -57,11 +57,11 @@
     display: flex;
   }
   
-  #order{
+  .image-button{
     background-image: url(../../../images/assets/pizza-1.jpg);
     margin-right: ($base-size * 0.5);
   }
-  #booking{
+  .image-button .booking{
     background-image: url(../../../images/assets/pizza-2.jpg);
   }
   
