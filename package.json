@@ -10,7 +10,7 @@
     "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
     "init:gitignore:custom": "echo \"dist\" >> .gitignore",
     "test": "npm-run-all test:*",
-    "test:html": "html-validate src/*.html",
+    
     "test:js": "eslint src/js/",
     
     "build": "npm-run-all build:* test",
@@ -49,5 +49,10 @@
   "dependencies": {
     "json-server": "^0.17.0"
     
+  },
+  "engines": {
+    "node": ">=0.10.3 <15"
   }
 }
+
+
